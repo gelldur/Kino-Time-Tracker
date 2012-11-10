@@ -1,1 +1,0 @@
-pierwsza zmiana
