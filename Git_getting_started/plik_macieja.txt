@@ -1,10 +1,14 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿<<<<<<< HEAD
 dodany plik
 
 po raz drugi dodana tresc (zadanie 4)...
 
 >>>>>>> 45b6baf7560c1fa9ddbe4fd103d3a4f4ee74947a
+=======
+dodany plik
+>>>>>>> parent of 45b6baf... Helping with 4 task
 =======
 dodany plik
 >>>>>>> parent of 45b6baf... Helping with 4 task
