@@ -2,6 +2,13 @@
 #include <cstdio>
 int main()
 {
-	printf("Hello merge");
+	
+	/*
+	
+		wjefksf;adsjfjhwefi
+	
+	
+	*/
+	std::cout << "Hello merge" << std::endl;
 	return 0;
 }
