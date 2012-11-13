@@ -1,4 +1,0 @@
-﻿Dopiszesz mi, że plik Dawid jest teraz plikiem Patryka ;>?
-Plik Dawida jest plikiem Drozda :)
-
-Polecam zmienić kodowanie z WINDOWS-1250 na UTF-8 Bo tak wysyłasz znaczki :)
