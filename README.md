@@ -1,4 +1,4 @@
 Kino-Time-Tracker
 =================
 
-Project Time Tracker
+Project Kino Time Tracker
