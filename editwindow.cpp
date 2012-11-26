@@ -1,6 +1,10 @@
+#include <QDateTime>
+#include <QInputDialog>
+#include <cstdio>
+
 #include "editwindow.h"
 #include "ui_editwindow.h"
-#include <QInputDialog>
+
 
 EditWindow::EditWindow(QWidget *parent) :
     QDialog(parent),
@@ -16,7 +20,18 @@ EditWindow::EditWindow(QWidget *parent) :
     ui->FMonth->setValidator(new QRegExpValidator(regExpMonth, this));
     ui->TMonth->setValidator(new QRegExpValidator(regExpMonth, this));
 
-    QRegExp regExpYear("[2][0][1][2-9]");
+    QString stringYear = QDateTime::currentDateTime().toString("yyyy");
+    char buffor[256];
+    sprintf(buffor,"(19)[0-9]{2}|[2-%c][0-%c][0-%c][0-%c]",
+            stringYear.toStdString()[0],
+            stringYear.toStdString()[1],
+            stringYear.toStdString()[2],
+            stringYear.toStdString()[3]);
+
+    qDebug("%s\n",buffor);
+
+
+    QRegExp regExpYear(buffor);
     ui->FYear->setValidator(new QRegExpValidator(regExpYear, this));
     ui->TYear->setValidator(new QRegExpValidator(regExpYear, this));
 }
