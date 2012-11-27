@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QCompleter>
 
 namespace Ui
 {
@@ -14,6 +15,7 @@ class MainWindow : public QMainWindow
 private:
 
     Ui::MainWindow *ui;
+    QCompleter *p_WordCompleter;
 
 public slots:
 

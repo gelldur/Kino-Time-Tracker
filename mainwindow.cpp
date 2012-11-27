@@ -10,6 +10,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->menuEdit,SIGNAL(aboutToShow()),this,SLOT(openEditWindow()));
 
+    QStringList myList;
+    myList <<"Ala" <<"Asia"<<"Bartek"<<"Basia"<<"Czarek"<<"Cecylia"<<"Michal"<<"Mateusza"<<"Mateusz";
+    p_WordCompleter = new QCompleter(myList, this);
+    p_WordCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    ui->lineEdit->setCompleter(p_WordCompleter);
+
 }
 
 MainWindow::~MainWindow()
