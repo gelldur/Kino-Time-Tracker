@@ -21,3 +21,6 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui \
     editwindow.ui
+
+OTHER_FILES += \
+    resources/list.txt

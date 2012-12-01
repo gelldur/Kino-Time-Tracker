@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "editwindow.h"
+#include <QTextStream>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -10,12 +11,31 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->menuEdit,SIGNAL(aboutToShow()),this,SLOT(openEditWindow()));
 
-    QStringList myList;
-    myList <<"Ala" <<"Asia"<<"Bartek"<<"Basia"<<"Czarek"<<"Cecylia"<<"Michal"<<"Mateusza"<<"Mateusz";
-    p_WordCompleter = new QCompleter(myList, this);
+    QStringList* myList =  loadTextFile();
+    /*QStringList myList;
+    //myList <<"Ala" <<"Asia"<<"Bartek"<<"Basia"<<"Czarek"<<"Cecylia"<<"Michal"<<"Mateusza"<<"Mateusz";
+    p_WordCompleter = new QCompleter(myList, this);*/
+    p_WordCompleter = new QCompleter(*myList, this);
     p_WordCompleter->setCaseSensitivity(Qt::CaseInsensitive);
     ui->lineEdit->setCompleter(p_WordCompleter);
 
+}
+
+QStringList* MainWindow::loadTextFile()
+{
+    QFile inputFile(":/resources/list.txt");
+    inputFile.open(QIODevice::ReadOnly);
+
+    QStringList* list = new QStringList();
+    QTextStream in(&inputFile);
+    while ( !in.atEnd() )
+    {
+        QString line = in.readLine();
+        list->push_back(line);
+    }
+
+    inputFile.close();
+    return list;
 }
 
 MainWindow::~MainWindow()

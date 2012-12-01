@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QCompleter>
+#include <QFile>
 
 namespace Ui
 {
@@ -16,6 +17,7 @@ private:
 
     Ui::MainWindow *ui;
     QCompleter *p_WordCompleter;
+    QStringList* loadTextFile();
 
 public slots:
 
