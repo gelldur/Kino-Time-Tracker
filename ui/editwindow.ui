@@ -36,14 +36,14 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,1">
+    <layout class="QVBoxLayout" name="verticalLayoutTop" stretch="1,1">
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <layout class="QHBoxLayout" name="horizontalLayoutDate">
        <property name="sizeConstraint">
         <enum>QLayout::SetMinimumSize</enum>
        </property>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout">
+        <layout class="QVBoxLayout" name="verticalLayoutFrom">
          <item>
           <widget class="QLabel" name="fromText">
            <property name="layoutDirection">
@@ -58,12 +58,12 @@
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
+          <layout class="QHBoxLayout" name="horizontalLayoutDateFrom">
            <property name="sizeConstraint">
             <enum>QLayout::SetMinimumSize</enum>
            </property>
            <item>
-            <widget class="QLineEdit" name="fDay">
+            <widget class="QLineEdit" name="fromDay">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -85,14 +85,14 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="fTextDaySlashMonthWindows">
+            <widget class="QLabel" name="fromTextDaySlashMonthWindows">
              <property name="text">
               <string>/</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="fMonth">
+            <widget class="QLineEdit" name="fromMonth">
              <property name="enabled">
               <bool>true</bool>
              </property>
@@ -114,14 +114,14 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="fTextMonthSlashYearWindows">
+            <widget class="QLabel" name="fromTextMonthSlashYearWindows">
              <property name="text">
               <string>/</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="fYear">
+            <widget class="QLineEdit" name="fromYear">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -143,7 +143,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QTimeEdit" name="fTime">
+            <widget class="QTimeEdit" name="fromTime">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                <horstretch>1</horstretch>
@@ -166,14 +166,14 @@
         </layout>
        </item>
        <item>
-        <widget class="Line" name="ftLine">
+        <widget class="Line" name="fromToLine">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
         </widget>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <layout class="QVBoxLayout" name="verticalLayoutTo">
          <item>
           <widget class="QLabel" name="toText">
            <property name="text">
@@ -185,12 +185,12 @@
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <layout class="QHBoxLayout" name="horizontalLayoutDateTo">
            <property name="sizeConstraint">
             <enum>QLayout::SetMinimumSize</enum>
            </property>
            <item>
-            <widget class="QLineEdit" name="tDay">
+            <widget class="QLineEdit" name="toDay">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -206,14 +206,14 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="tTextDaySlashMonthWindows">
+            <widget class="QLabel" name="toTextDaySlashMonthWindows">
              <property name="text">
               <string>/</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="tMonth">
+            <widget class="QLineEdit" name="toMonth">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -229,14 +229,14 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="tTextMonthSlashYearWindows">
+            <widget class="QLabel" name="toTextMonthSlashYearWindows">
              <property name="text">
               <string>/</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="tYear">
+            <widget class="QLineEdit" name="toYear">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -252,7 +252,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QTimeEdit" name="tTime">
+            <widget class="QTimeEdit" name="toTime">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -271,12 +271,12 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="5,5">
+      <layout class="QHBoxLayout" name="horizontalLayoutMiddle" stretch="5,5">
        <property name="sizeConstraint">
         <enum>QLayout::SetMinimumSize</enum>
        </property>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,2,1">
+        <layout class="QHBoxLayout" name="horizontalLayoutActivity" stretch="1,2,1">
          <property name="sizeConstraint">
           <enum>QLayout::SetMinimumSize</enum>
          </property>
@@ -319,7 +319,7 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <layout class="QHBoxLayout" name="horizontalLayoutProgress">
          <property name="sizeConstraint">
           <enum>QLayout::SetMaximumSize</enum>
          </property>
@@ -344,7 +344,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="checkClick">
+          <widget class="QCheckBox" name="checkProgress">
            <property name="text">
             <string/>
            </property>
@@ -373,7 +373,7 @@
     </layout>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_4">
+    <layout class="QVBoxLayout" name="verticalLayoutDescription">
      <item>
       <widget class="QLabel" name="textDescription">
        <property name="text">
@@ -399,17 +399,17 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>fDay</tabstop>
-  <tabstop>fMonth</tabstop>
-  <tabstop>fYear</tabstop>
-  <tabstop>fTime</tabstop>
-  <tabstop>tDay</tabstop>
-  <tabstop>tMonth</tabstop>
-  <tabstop>tYear</tabstop>
-  <tabstop>tTime</tabstop>
+  <tabstop>fromDay</tabstop>
+  <tabstop>fromMonth</tabstop>
+  <tabstop>fromYear</tabstop>
+  <tabstop>fromTime</tabstop>
+  <tabstop>toDay</tabstop>
+  <tabstop>toMonth</tabstop>
+  <tabstop>toYear</tabstop>
+  <tabstop>toTime</tabstop>
   <tabstop>activity</tabstop>
   <tabstop>description</tabstop>
-  <tabstop>checkClick</tabstop>
+  <tabstop>checkProgress</tabstop>
   <tabstop>buttons</tabstop>
  </tabstops>
  <resources/>
