@@ -12,8 +12,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Kino-Time-Tracker
 TEMPLATE = app
 
-OTHER_FILES += \
-    resources/list.txt
+OTHER_FILES +=
 
 INCLUDEPATH += src \
 		src/database
@@ -32,3 +31,6 @@ SOURCES += \
 FORMS += \
     ui/mainwindow.ui \
     ui/editwindow.ui
+
+RESOURCES += \
+    resources.qrc
