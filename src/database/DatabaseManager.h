@@ -1,22 +1,27 @@
 #ifndef DATABASEMANAGER_H
 #define DATABASEMANAGER_H
-#include <QObject>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QFile>
 
-class DatabaseManager : public QObject
+static const QString databaseDriverString = "QSQLITE";
+
+class DatabaseManager
 {
+private:
+    static const QString DATABASE_NAME;
+    static DatabaseManager* INSTANCE;
+    QSqlDatabase db;
+    DatabaseManager();
+
 public:
-    DatabaseManager(QObject *parent = 0);
     ~DatabaseManager();
 
-public:
-    bool openDB();
-    bool deleteDB();
+    bool open();
+    bool deleteDatabase();
     QSqlError lastError();
 
-private:
-    QSqlDatabase db;
+    bool isDatabaseExist();
+
 };
 #endif // DATABASEMANAGER_H

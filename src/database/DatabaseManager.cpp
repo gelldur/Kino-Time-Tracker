@@ -1,8 +1,9 @@
 #include "DatabaseManager.h"
+#include <QMessageBox>
 
-#include <QDir>
+const QString DatabaseManager::DATABASE_NAME = QString("kino_time_tracker.db");
 
-DatabaseManager::DatabaseManager(QObject *parent) : QObject(parent)
+DatabaseManager::DatabaseManager()
 {
 
 }
@@ -12,13 +13,26 @@ DatabaseManager::~DatabaseManager()
 
 }
 
-bool DatabaseManager::openDB()
+bool DatabaseManager::open()
 {
+    //Check driver
+    if (!QSqlDatabase::isDriverAvailable (databaseDriverString))
+    {
+        qDebug("I don't have driver to open sqlite!");
+        QMessageBox::critical(0,"Database Error","Database error");
+
+        exit(1);
+    }
+
     // Find QSLite driver
-    db = QSqlDatabase::addDatabase("QSQLITE");
+    db = QSqlDatabase::addDatabase(databaseDriverString);
+    if(!db.isValid())
+    {
+        qDebug("Can't open database connection");
+    }
 
     //TODO Store database in home dir
-    db.setDatabaseName("my.db.sqlite");
+    db.setDatabaseName(DATABASE_NAME);
 
     // Open databasee
     return db.open();
@@ -31,11 +45,16 @@ QSqlError DatabaseManager::lastError()
     return db.lastError();
 }
 
-bool DatabaseManager::deleteDB()
+bool DatabaseManager::isDatabaseExist()
+{
+    return QFile::exists(DATABASE_NAME);
+}
+
+bool DatabaseManager::deleteDatabase()
 {
     // Close database
     db.close();
 
     // Remove created database binary file
-    return QFile::remove("my.db.sqlite");
+    return QFile::remove(DATABASE_NAME);
 }
