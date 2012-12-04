@@ -1,9 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
 #include <QTextStream>
-
 #include "editwindow.h"
+#include "about.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -51,4 +50,11 @@ void MainWindow::openEditWindow()
 
     EditWindow* editWindow = new EditWindow(this);
     editWindow->show();
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    About aboutWindow;
+    aboutWindow.setModal(true);
+    aboutWindow.exec();
 }

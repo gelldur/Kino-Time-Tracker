@@ -28,6 +28,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+   void on_actionAbout_triggered();
 };
 
 #endif // MAINWINDOW_H

@@ -18,14 +18,17 @@ INCLUDEPATH += src \
 HEADERS += \
     src/mainwindow.h \
     src/editwindow.h \
-    src/database/DatabaseManager.h
+    src/database/DatabaseManager.h \
+    src/about.h \
 
 SOURCES += \
     src/mainwindow.cpp \
     src/main.cpp \
     src/editwindow.cpp \
-    src/database/DatabaseManager.cpp
+    src/database/DatabaseManager.cpp \
+    src/about.cpp \
 
 FORMS += \
     ui/mainwindow.ui \
-    ui/editwindow.ui
+    ui/editwindow.ui \
+    ui/about.ui \
