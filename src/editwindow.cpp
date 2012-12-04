@@ -2,8 +2,8 @@
 #include <QInputDialog>
 #include <cstdio>
 
-#include "editwindow.h"
-#include "ui_editwindow.h"
+#include "EditWindow.h"
+#include "ui_EditWindow.h"
 
 
 EditWindow::EditWindow(QWidget *parent) :

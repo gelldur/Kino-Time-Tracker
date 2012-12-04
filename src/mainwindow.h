@@ -16,7 +16,7 @@ class MainWindow : public QMainWindow
 private:
 
     Ui::MainWindow *ui;
-    QCompleter *p_WordCompleter;
+    QCompleter *pWordCompleter;
     QStringList* loadTextFile();
 
 public slots:
@@ -29,7 +29,7 @@ public:
     ~MainWindow();
 
 private slots:
-   void on_actionAbout_triggered();
+   void onActionAboutTriggered();
 };
 
 #endif // MAINWINDOW_H

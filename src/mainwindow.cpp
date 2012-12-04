@@ -1,8 +1,8 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "MainWindow.h"
+#include "ui_MainWindow.h"
 #include <QTextStream>
-#include "editwindow.h"
-#include "about.h"
+#include "EditWindow.h"
+#include "AboutDialog.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,10 +15,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QStringList* myList =  loadTextFile();
     /*QStringList myList;
     //myList <<"Ala" <<"Asia"<<"Bartek"<<"Basia"<<"Czarek"<<"Cecylia"<<"Michal"<<"Mateusza"<<"Mateusz";
-    p_WordCompleter = new QCompleter(myList, this);*/
-    p_WordCompleter = new QCompleter(*myList, this);
-    p_WordCompleter->setCaseSensitivity(Qt::CaseInsensitive);
-    ui->lineEdit->setCompleter(p_WordCompleter);
+    pWordCompleter = new QCompleter(myList, this);*/
+    pWordCompleter = new QCompleter(*myList, this);
+    pWordCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    ui->lineEdit->setCompleter(pWordCompleter);
 }
 
 QStringList* MainWindow::loadTextFile()
@@ -51,7 +51,7 @@ void MainWindow::openEditWindow()
     editWindow->show();
 }
 
-void MainWindow::on_actionAbout_triggered()
+void MainWindow::onActionAboutTriggered()
 {
     /*About aboutWindow;
     aboutWindow.setModal(true);
