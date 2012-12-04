@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     connect(ui->menuEdit,SIGNAL(aboutToShow()),this,SLOT(openEditWindow()));
+    connect(ui->ActionAbout,SIGNAL(triggered()),this,SLOT(openAboutDialog()));
 
     QStringList* myList =  loadTextFile();
     /*QStringList myList;
@@ -51,9 +52,9 @@ void MainWindow::openEditWindow()
     editWindow->show();
 }
 
-void MainWindow::onActionAboutTriggered()
+void MainWindow::openAboutDialog()
 {
-    /*About aboutWindow;
+    /*AboutDialog aboutWindow;
     aboutWindow.setModal(true);
     aboutWindow.exec();*/
     QMessageBox::information(this, "About Time Tracker", "Created by KINO's group Adam Mickiewicz University");

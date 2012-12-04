@@ -29,7 +29,7 @@ public:
     ~MainWindow();
 
 private slots:
-   void onActionAboutTriggered();
+   void openAboutDialog();
 };
 
 #endif // MAINWINDOW_H

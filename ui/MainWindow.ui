@@ -180,7 +180,7 @@
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="actionAbout"/>
+    <addaction name="ActionAbout"/>
    </widget>
    <addaction name="menuHelp"/>
    <addaction name="menuEdit"/>
@@ -195,7 +195,7 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionAbout">
+  <action name="ActionAbout">
    <property name="text">
     <string>About</string>
    </property>
