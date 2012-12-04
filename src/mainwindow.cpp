@@ -1,7 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "editwindow.h"
+
 #include <QTextStream>
+
+#include "editwindow.h"
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -18,7 +21,6 @@ MainWindow::MainWindow(QWidget *parent) :
     p_WordCompleter = new QCompleter(*myList, this);
     p_WordCompleter->setCaseSensitivity(Qt::CaseInsensitive);
     ui->lineEdit->setCompleter(p_WordCompleter);
-
 }
 
 QStringList* MainWindow::loadTextFile()

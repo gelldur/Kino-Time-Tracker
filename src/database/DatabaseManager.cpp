@@ -1,19 +1,11 @@
 #include "DatabaseManager.h"
 #include <QMessageBox>
+#include <QSqlQuery>
 
-const QString DatabaseManager::DATABASE_NAME = QString("kino_time_tracker.db");
+DatabaseManager* DatabaseManager::m_INSTANCE = NULL;
+const QString DatabaseManager::m_DATABASE_NAME = QString("kino_time_tracker.db");
 
 DatabaseManager::DatabaseManager()
-{
-
-}
-
-DatabaseManager::~DatabaseManager()
-{
-
-}
-
-bool DatabaseManager::open()
 {
     //Check driver
     if (!QSqlDatabase::isDriverAvailable (databaseDriverString))
@@ -26,16 +18,56 @@ bool DatabaseManager::open()
 
     // Find QSLite driver
     db = QSqlDatabase::addDatabase(databaseDriverString);
-    if(!db.isValid())
-    {
-        qDebug("Can't open database connection");
-    }
 
+    bool initDatabase = isDatabaseExist();
     //TODO Store database in home dir
-    db.setDatabaseName(DATABASE_NAME);
+    db.setDatabaseName(m_DATABASE_NAME);
+    open();
+    if(!initDatabase)
+        initializeDatabase();
+}
 
+DatabaseManager::~DatabaseManager()
+{
+
+}
+
+DatabaseManager *DatabaseManager::getInstance()
+{
+    if(m_INSTANCE == NULL)
+    {
+        m_INSTANCE = new DatabaseManager();
+    }
+    return m_INSTANCE;
+}
+
+bool DatabaseManager::open()
+{
+    if (!db.open())
+    {
+        /*
+           *Gui message that informs that the database cannot open
+           */
+        QMessageBox::critical(0,"Database connection error","Database connection error");
+
+        /*
+           *@return false if database connection failed.
+           */
+        return false;
+    }
     // Open databasee
-    return db.open();
+    return db.isOpen();
+}
+
+bool DatabaseManager::close()
+{
+
+    db.close();
+
+    if(!db.isOpen())
+        return true;
+    else
+        return false;
 }
 
 QSqlError DatabaseManager::lastError()
@@ -47,7 +79,7 @@ QSqlError DatabaseManager::lastError()
 
 bool DatabaseManager::isDatabaseExist()
 {
-    return QFile::exists(DATABASE_NAME);
+    return QFile::exists(m_DATABASE_NAME);
 }
 
 bool DatabaseManager::deleteDatabase()
@@ -56,5 +88,24 @@ bool DatabaseManager::deleteDatabase()
     db.close();
 
     // Remove created database binary file
-    return QFile::remove(DATABASE_NAME);
+    return QFile::remove(m_DATABASE_NAME);
+}
+
+
+void DatabaseManager::initializeDatabase()
+{
+    qDebug("Initializing database");
+
+    bool returnValue;
+    QSqlQuery query;
+    returnValue =
+            query.exec("CREATE TABLE IF NOT EXISTS tasks "
+                       "(_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                       "title TEXT);");
+
+    if(!returnValue)
+    {
+        qDebug("Query error:");
+        qDebug(query.lastError().text().toStdString().c_str());
+    }
 }
