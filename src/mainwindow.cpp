@@ -4,7 +4,6 @@
 #include "editwindow.h"
 #include "about.h"
 
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -54,7 +53,8 @@ void MainWindow::openEditWindow()
 
 void MainWindow::on_actionAbout_triggered()
 {
-    About aboutWindow;
+    /*About aboutWindow;
     aboutWindow.setModal(true);
-    aboutWindow.exec();
+    aboutWindow.exec();*/
+    QMessageBox::information(this, "About Time Tracker", "Created by KINO's group Adam Mickiewicz University");
 }
