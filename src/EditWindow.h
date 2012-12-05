@@ -15,6 +15,11 @@ public:
     explicit EditWindow(QWidget *parent = 0);
     ~EditWindow();
     
+private slots:
+    void on_fromYear_editingFinished();
+
+    void on_toYear_editingFinished();
+
 private:
     Ui::EditWindow *ui;
 };
