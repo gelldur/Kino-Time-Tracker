@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QStringList* myList =  loadTextFile();
     /*QStringList myList;
-    //myList <<"Ala" <<"Asia"<<"Bartek"<<"Basia"<<"Czarek"<<"Cecylia"<<"Michal"<<"Mateusza"<<"Mateusz";
+    myList <<"Ala" <<"Asia"<<"Bartek"<<"Basia"<<"Czarek"<<"Cecylia"<<"Michal"<<"Mateusza"<<"Mateusz";
     pWordCompleter = new QCompleter(myList, this);*/
     pWordCompleter = new QCompleter(*myList, this);
     pWordCompleter->setCaseSensitivity(Qt::CaseInsensitive);
