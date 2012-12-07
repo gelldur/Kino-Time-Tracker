@@ -115,6 +115,13 @@ void EditWindow::onFromYearEditingFinished()
 void EditWindow::onToYearEditingFinished()
 {
     yearValid(ui->toYear);
+    qDebug("%d",ui->fromYear->text().compare(ui->toYear->text()));
+    if(ui->fromYear->text().toInt() > ui->toYear->text().toInt())
+    {
+        ui->toYear->clear();
+
+    }
+    //if(yearValid < ui->fromYear)
 }
 
 void EditWindow::yearValid(QLineEdit* year)
