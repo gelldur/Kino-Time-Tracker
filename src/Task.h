@@ -3,7 +3,6 @@
 #include <QDateTime>
 #include <QString>
 
-
 class Task
 {
 public:
@@ -13,6 +12,7 @@ public:
     QString getDescription();
     QDateTime getStartTime();
     QDateTime getEndTime();
+    bool isInProgress();
 
 private:
 

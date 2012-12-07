@@ -3,10 +3,14 @@
 #include <QSqlQuery>
 
 DatabaseManager* DatabaseManager::m_INSTANCE = NULL;
-const QString DatabaseManager::m_DATABASE_NAME = QString("kino_time_tracker.db");
-const QString DatabaseManager::TASK_DATABASE_NAME = QString("tasks");
-const QString DatabaseManager::TASK_TITLE = QString("title");
-const QString DatabaseManager::TASK_ID = QString("_id");
+const char* DatabaseManager::DATABASE_FILE_NAME = "kino_time_tracker_database.db";
+
+const char* DatabaseManager::TASK_DATABASE_NAME = "tasks";
+const char* DatabaseManager::TASK_NAME = "title";
+const char* DatabaseManager::TASK_ID = "_id";
+const char* DatabaseManager::TASK_DESCRIPTION = "description";
+const char* DatabaseManager::TASK_START_TIME = "start_time";
+const char* DatabaseManager::TASK_END_TIME = "end_time";
 
 DatabaseManager::DatabaseManager()
 {
@@ -24,13 +28,11 @@ DatabaseManager::DatabaseManager()
 
     bool initDatabase = isDatabaseExist();
     //TODO Store database in home dir
-    db.setDatabaseName(m_DATABASE_NAME);
-    open();
+    db.setDatabaseName(DATABASE_FILE_NAME);
+
     if(!initDatabase)
         initializeDatabase();
 }
-
-
 
 DatabaseManager::~DatabaseManager()
 {
@@ -84,9 +86,8 @@ QSqlError DatabaseManager::lastError()
 
 bool DatabaseManager::isDatabaseExist()
 {
-    return QFile::exists(m_DATABASE_NAME);
+    return QFile::exists(DATABASE_FILE_NAME);
 }
-
 
 bool DatabaseManager::deleteDatabase()
 {
@@ -94,26 +95,33 @@ bool DatabaseManager::deleteDatabase()
     db.close();
 
     // Remove created database binary file
-    return QFile::remove(m_DATABASE_NAME);
+    return QFile::remove(DATABASE_FILE_NAME);
 }
-
 
 void DatabaseManager::initializeDatabase()
 {
     qDebug("Initializing database");
+    open();
 
-    bool returnValue;
     QSqlQuery query;
-    returnValue =
-            query.exec("CREATE TABLE IF NOT EXISTS tasks "
-                       "(_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                       "title TEXT);");
+
+    QString execQuery("CREATE TABLE IF NOT EXISTS ");
+    execQuery.append(TASK_DATABASE_NAME);
+    execQuery.append(" (").append(TASK_ID);
+    execQuery.append(" INTEGER PRIMARY KEY AUTOINCREMENT,");
+    execQuery.append(TASK_NAME).append(" TEXT,");
+    execQuery.append(TASK_START_TIME).append(" INTEGER,");
+    execQuery.append(TASK_END_TIME).append(" INTEGER,");
+    execQuery.append(TASK_DESCRIPTION).append(" TEXT);");
+
+    bool returnValue = query.exec(execQuery);
 
     if(!returnValue)
     {
         qDebug("Query error:");
-        qDebug(query.lastError().text().toStdString().c_str());
+        qDebug("%s",query.lastError().text().toAscii().constData());
     }
+    close();
 }
 
 QSqlQuery DatabaseManager::exec(QString &query)

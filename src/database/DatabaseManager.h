@@ -4,6 +4,7 @@
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QFile>
+#include <QVariant>
 
 static const QString databaseDriverString = "QSQLITE";
 
@@ -21,10 +22,14 @@ private:
 public:
     ~DatabaseManager();
 
-    static const QString m_DATABASE_NAME;
-    static const QString TASK_DATABASE_NAME;
-    static const QString TASK_ID;
-    static const QString TASK_TITLE;
+    static const char* DATABASE_FILE_NAME;
+
+    static const char* TASK_DATABASE_NAME;
+    static const char* TASK_ID;
+    static const char* TASK_NAME;
+    static const char* TASK_DESCRIPTION;
+    static const char* TASK_START_TIME;
+    static const char* TASK_END_TIME;
 
     static DatabaseManager* getInstance();
 

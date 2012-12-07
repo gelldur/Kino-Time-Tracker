@@ -3,11 +3,14 @@
 #include <QTextStream>
 #include "EditWindow.h"
 #include "AboutDialog.h"
+#include "DatabaseManager.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    DatabaseManager::getInstance();
+
     ui->setupUi(this);
 
     connect(ui->menuEdit,SIGNAL(aboutToShow()),this,SLOT(openEditWindow()));
