@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     TaskManager t;
     Task* task  = t.getTask(1);
-
+    if(task != NULL)
     qDebug("Wyciagnalem taska id=%d tytul:%s dataS:%lld dataE=%lld opis: %s\n",
            task->getId(),
            task->getName().toAscii().constData(),
