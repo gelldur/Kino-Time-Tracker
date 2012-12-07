@@ -276,7 +276,7 @@
         <enum>QLayout::SetMinimumSize</enum>
        </property>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayoutActivity" stretch="1,2,1">
+        <layout class="QHBoxLayout" name="horizontalLayoutActivity" stretch="1,0,1">
          <property name="sizeConstraint">
           <enum>QLayout::SetMinimumSize</enum>
          </property>
@@ -294,11 +294,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="activity">
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-          </widget>
+          <widget class="QLineEdit" name="lineEdit"/>
          </item>
          <item>
           <spacer name="horizontalSpacer">
@@ -407,7 +403,6 @@
   <tabstop>toMonth</tabstop>
   <tabstop>toYear</tabstop>
   <tabstop>toTime</tabstop>
-  <tabstop>activity</tabstop>
   <tabstop>description</tabstop>
   <tabstop>checkProgress</tabstop>
   <tabstop>buttons</tabstop>
