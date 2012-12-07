@@ -10,24 +10,24 @@ Task::Task(QString name, QString description, long start, long end)
 }
 
 
-QString Task::m_getName()
+QString Task::getName()
 {
     return(m_name);
 }
-QString Task::m_getDescription()
+QString Task::getDescription()
 {
     return(m_description);
 }
 
 
-QDateTime Task::m_getStartTime()
+QDateTime Task::getStartTime()
 {
     QDateTime dateStart = QDateTime::fromMSecsSinceEpoch(m_startTime);
     return(dateStart);
 }
 
 
-QDateTime Task::m_getEndTime()
+QDateTime Task::getEndTime()
 {
     QDateTime dateEnd = QDateTime::fromMSecsSinceEpoch(m_endTime);
     return(dateEnd);
