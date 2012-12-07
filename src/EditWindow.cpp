@@ -45,8 +45,11 @@ EditWindow::EditWindow(QWidget *parent, Task *task) :
     QString yearEnd = task->getEndTime().toString("yyyy");
     ui->toYear->setText(yearEnd);
 
-    QString hourStart = task->getStartTime().toString("hh:mm");
-    ui->fromTime->setTime(QTime::fromString(hourStart));
+    QString hourStart = task->getStartTime().toString("hhmm");
+    ui->fromTime->setTime(QTime::fromString(hourStart, "hhmm"));
+    QString hourEnd = task->getEndTime().toString("hhmm");
+    ui->toTime->setTime(QTime::fromString(hourEnd, "hhmm"));
+
 
     ui->name->setText(task->getName());
     ui->description->setText(task->getDescription());
