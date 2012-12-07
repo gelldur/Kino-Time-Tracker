@@ -5,8 +5,8 @@ Task::Task(QString name, QString description, long start, long end)
 {
     m_name=name;
     m_description=description;
-    m_startTime=start;
-    m_endTime=end;
+    m_dateStart = QDateTime::fromMSecsSinceEpoch(start);
+    m_dateEnd = QDateTime::fromMSecsSinceEpoch(end);
 }
 
 
@@ -22,13 +22,11 @@ QString Task::getDescription()
 
 QDateTime Task::getStartTime()
 {
-    QDateTime dateStart = QDateTime::fromMSecsSinceEpoch(m_startTime);
-    return(dateStart);
+    return(m_dateStart);
 }
 
 
 QDateTime Task::getEndTime()
 {
-    QDateTime dateEnd = QDateTime::fromMSecsSinceEpoch(m_endTime);
-    return(dateEnd);
+    return(m_dateEnd);
 }
