@@ -42,6 +42,9 @@ EditWindow::EditWindow(QWidget *parent, Task *task) :
     ui->toYear->setValidator(new QRegExpValidator(regExpYear, this));
     QString yearEnd = task->getStartTime().toString("yyyy");
     ui->fromDay->setText(yearEnd);
+
+    ui->name->setText(task->getName());
+    ui->description->setText(task->getDescription());
 }
 
 EditWindow::~EditWindow()
