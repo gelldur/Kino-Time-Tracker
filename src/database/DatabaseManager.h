@@ -2,14 +2,15 @@
 #define DATABASEMANAGER_H
 #include <QSqlDatabase>
 #include <QSqlError>
+#include <QSqlQuery>
 #include <QFile>
+#include <QVariant>
 
 static const QString databaseDriverString = "QSQLITE";
 
 class DatabaseManager
 {
 private:
-    static const QString m_DATABASE_NAME;
     static DatabaseManager* m_INSTANCE;
     QSqlDatabase db;
     DatabaseManager();
@@ -21,6 +22,15 @@ private:
 public:
     ~DatabaseManager();
 
+    static const char* DATABASE_FILE_NAME;
+
+    static const char* TASK_DATABASE_NAME;
+    static const char* TASK_ID;
+    static const char* TASK_NAME;
+    static const char* TASK_DESCRIPTION;
+    static const char* TASK_START_TIME;
+    static const char* TASK_END_TIME;
+
     static DatabaseManager* getInstance();
 
     bool open();
@@ -30,6 +40,8 @@ public:
     QSqlError lastError();
 
     bool isDatabaseExist();
+    QSqlQuery exec(QString &query);
+
 
 };
 #endif // DATABASEMANAGER_H
