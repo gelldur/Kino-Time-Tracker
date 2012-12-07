@@ -62,8 +62,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::openEditWindow()
 {
-
-    EditWindow* editWindow = new EditWindow(this);
+    Task *task = new Task("testowy", "opis testowy", 10092012, 10102012);
+    EditWindow* editWindow = new EditWindow(this, task);
     editWindow->show();
 }
 

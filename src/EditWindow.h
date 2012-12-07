@@ -2,6 +2,7 @@
 #define EDITWINDOW_H
 
 #include <QDialog>
+#include "Task.h"
 #include <QLineEdit>
 
 namespace Ui {
@@ -13,7 +14,7 @@ class EditWindow : public QDialog
     Q_OBJECT
     
 public:
-    explicit EditWindow(QWidget *parent = 0);
+    explicit EditWindow(QWidget *parent, Task *task);
     ~EditWindow();
     
 private slots:
