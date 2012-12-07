@@ -5,7 +5,7 @@
 DatabaseManager* DatabaseManager::m_INSTANCE = NULL;
 const char* DatabaseManager::DATABASE_FILE_NAME = "kino_time_tracker_database.db";
 
-const char* DatabaseManager::TASK_DATABASE_NAME = "tasks";
+const char* DatabaseManager::TASK_TABLE_NAME = "tasks";
 const char* DatabaseManager::TASK_NAME = "title";
 const char* DatabaseManager::TASK_ID = "_id";
 const char* DatabaseManager::TASK_DESCRIPTION = "description";
@@ -106,7 +106,7 @@ void DatabaseManager::initializeDatabase()
     QSqlQuery query;
 
     QString execQuery("CREATE TABLE IF NOT EXISTS ");
-    execQuery.append(TASK_DATABASE_NAME);
+    execQuery.append(TASK_TABLE_NAME);
     execQuery.append(" (").append(TASK_ID);
     execQuery.append(" INTEGER PRIMARY KEY AUTOINCREMENT,");
     execQuery.append(TASK_NAME).append(" TEXT,");

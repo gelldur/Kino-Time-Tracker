@@ -14,7 +14,7 @@ bool TaskManager::addTask(Task *task)
     }
 
     QString query("INSERT INTO ");
-    query.append(DatabaseManager::TASK_DATABASE_NAME);
+    query.append(DatabaseManager::TASK_TABLE_NAME);
     query.append("(");
     query.append(DatabaseManager::TASK_NAME);
     query.append(",").append(DatabaseManager::TASK_START_TIME);
@@ -28,6 +28,25 @@ bool TaskManager::addTask(Task *task)
     query.append(")");
     dataBase->exec(query);
     return true;
+}
+
+Task *TaskManager::getTask(int id)
+{
+    DatabaseManager *dataBase = DatabaseManager::getInstance();
+    if(dataBase->open()==false)
+    {
+        return NULL;
+    }
+
+    QString query("SELECT ");
+    query.append(DatabaseManager::TASK_ID);
+    query.append(",").append(DatabaseManager::TASK_NAME);
+    query.append(",").append(DatabaseManager::TASK_START_TIME);
+    query.append(",").append(DatabaseManager::TASK_END_TIME);
+    query.append(",").append(DatabaseManager::TASK_DESCRIPTION);
+    query.append(" FROM ").append(DatabaseManager::TASK_TABLE_NAME);
+    query.append(" WHERE ").append(append(QString::number(id));
+
 }
 
 
