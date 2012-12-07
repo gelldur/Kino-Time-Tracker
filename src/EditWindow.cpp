@@ -14,8 +14,10 @@ EditWindow::EditWindow(QWidget *parent) :
     ui->setupUi(this);
 
     connect(ui->fromDay, SIGNAL(editingFinished()), this, SLOT(onFromDayEditingFinished()));
-    connect(ui->toDay, SIGNAL(editingFinished()), this, SLOT(onToDayEditingFinished()));
+    connect(ui->fromMonth, SIGNAL(editingFinished()), this, SLOT(onFromMonthEditingFinished()));
     connect(ui->fromYear, SIGNAL(editingFinished()), this, SLOT(onFromYearEditingFinished()));
+    connect(ui->toDay, SIGNAL(editingFinished()), this, SLOT(onToDayEditingFinished()));
+    connect(ui->toMonth, SIGNAL(editingFinished()), this, SLOT(onToMonthEditingFinished()));
     connect(ui->toYear, SIGNAL(editingFinished()), this, SLOT(onToYearEditingFinished()));
 
     QRegExp regExpDay("[0-9]{0,2}");
@@ -56,7 +58,7 @@ void EditWindow::dayValid(QLineEdit *day)
     if(intDay>31)
         day->setText("31");
     else if(intDay<10)
-        day->setText(QString("").sprintf("0%d",intDay));
+        day->setText(QString("").sprintf("0%d", intDay));
 }
 
 void EditWindow::onFromMonthEditingFinished()
@@ -71,6 +73,15 @@ void EditWindow::onToMonthEditingFinished()
 
 void EditWindow::monthValid(QLineEdit *month)
 {
+    QString stringGetMonth = month->text();
+    int intMonth = stringGetMonth.toInt();
+    if(intMonth <= 0)
+        intMonth=1;
+
+    if(intMonth>12)
+        month->setText("12");
+    else if(intMonth<10)
+        month->setText(QString("").sprintf("0%d", intMonth));
 }
 
 
@@ -95,5 +106,4 @@ void EditWindow::yearValid(QLineEdit* year)
         year->setText(stringYear);
     else if(intYear<1900)
         year->setText("1900");
-
 }
