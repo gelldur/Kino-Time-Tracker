@@ -40,7 +40,8 @@ Task *TaskManager::getTask(int id)
     }
 
     QString query("SELECT ");
-    query.append(DatabaseManager::TASK_NAME);
+    query.append(DatabaseManager::TASK_ID);
+    query.append(",").append(DatabaseManager::TASK_NAME);
     query.append(",").append(DatabaseManager::TASK_START_TIME);
     query.append(",").append(DatabaseManager::TASK_END_TIME);
     query.append(",").append(DatabaseManager::TASK_DESCRIPTION);
@@ -50,17 +51,36 @@ Task *TaskManager::getTask(int id)
     qDebug("%s",query.toAscii().constData());
 
     QSqlQuery getQuery = dataBase->exec(query);
-    if(getQuery.next() == false) return NULL;
 
-    QString name = getQuery.value(0).toString();
-    long long startTime = getQuery.value(1).toLongLong();
-    long long endTime = getQuery.value(2).toLongLong();
-    QString description = getQuery.value(3).toString();
+    vector<Task*>* tasks = parseTask(getQuery);
+    if(tasks->size() < 1)
+    {
+        delete tasks;
+        return NULL;
+    }
 
-    Task* task = new Task(id, name, description, startTime, endTime);
+    Task* task = tasks->at(0);
+    delete tasks;
 
     dataBase->close();
     return task;
+}
+
+vector<Task*>* TaskManager::parseTask(QSqlQuery &sqlQuery)
+{
+    vector<Task*>* tasks = new vector<Task*>();
+
+    while(sqlQuery.next())
+    {
+        int id = sqlQuery.value(0).toInt();
+        QString name = sqlQuery.value(1).toString();
+        long long startTime = sqlQuery.value(2).toLongLong();
+        long long endTime = sqlQuery.value(3).toLongLong();
+        QString description = sqlQuery.value(4).toString();
+
+        tasks->push_back(new Task(id, name, description, startTime, endTime));
+    }
+    return tasks;
 }
 
 
