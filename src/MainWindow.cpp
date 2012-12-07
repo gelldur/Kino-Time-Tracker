@@ -29,7 +29,12 @@ MainWindow::MainWindow(QWidget *parent) :
     TaskManager t;
     Task* task  = t.getTask(1);
 
-    qDebug("Wyciagnalem taska id=%d tytul:%s dataS:%lld dataE=%lld opis: %s\n",);
+    qDebug("Wyciagnalem taska id=%d tytul:%s dataS:%lld dataE=%lld opis: %s\n",
+           task->getId(),
+           task->getName().toAscii().constData(),
+           task->getStartTime().toMSecsSinceEpoch(),
+           task->getEndTime().toMSecsSinceEpoch(),
+           task->getDescription().toAscii().constData());
 }
 
 QStringList* MainWindow::loadTextFile()
