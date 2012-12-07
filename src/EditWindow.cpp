@@ -24,24 +24,25 @@ EditWindow::EditWindow(QWidget *parent, Task *task) :
     QString dayStart = task->getStartTime().toString("dd");
     ui->fromDay->setText(dayStart);
     ui->toDay->setValidator(new QRegExpValidator(regExpDay, this));
-    QString dayEnd = task->getStartTime().toString("dd");
+    QString dayEnd = task->getEndTime().toString("dd");
     ui->toDay->setText(dayEnd);
 
     QRegExp regExpMonth("[0-9]{0,2}");
+    qDebug("%s",task->getStartTime().toString("MM").toAscii().constData());
     ui->fromMonth->setValidator(new QRegExpValidator(regExpMonth, this));
-    QString monthStart = task->getStartTime().toString("mm");
+    QString monthStart = task->getStartTime().toString("MM");
     ui->fromMonth->setText(monthStart);
     ui->toMonth->setValidator(new QRegExpValidator(regExpMonth, this));
-    QString monthEnd = task->getStartTime().toString("mm");
+    QString monthEnd = task->getEndTime().toString("MM");
     ui->toMonth->setText(monthEnd);
 
     QRegExp regExpYear("[0-9]{0,4}");
     ui->fromYear->setValidator(new QRegExpValidator(regExpYear, this));
     QString yearStart = task->getStartTime().toString("yyyy");
-    ui->fromDay->setText(yearStart);
+    ui->fromYear->setText(yearStart);
     ui->toYear->setValidator(new QRegExpValidator(regExpYear, this));
-    QString yearEnd = task->getStartTime().toString("yyyy");
-    ui->fromDay->setText(yearEnd);
+    QString yearEnd = task->getEndTime().toString("yyyy");
+    ui->toYear->setText(yearEnd);
 
     ui->name->setText(task->getName());
     ui->description->setText(task->getDescription());

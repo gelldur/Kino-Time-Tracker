@@ -1,7 +1,7 @@
 #include "Task.h"
 
 
-Task::Task(int id, QString name, QString description, long start, long end)
+Task::Task(int id, QString name, QString description, long long start, long long end)
 {
     m_id = id;
     m_name = name;

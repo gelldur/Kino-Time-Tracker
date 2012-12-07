@@ -57,7 +57,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::openEditWindow()
 {
-    Task *task = new Task("testowy", "opis testowy", 10092012, 10102012);
+    Task *task = new Task(1, "testowy", "opis testowy", QDateTime::currentMSecsSinceEpoch(), QDateTime::currentMSecsSinceEpoch());
     EditWindow* editWindow = new EditWindow(this, task);
     editWindow->show();
 }

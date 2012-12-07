@@ -6,7 +6,7 @@
 class Task
 {
 public:
-    Task(int id, QString name, QString description, long start, long end);
+    Task(int id, QString name, QString description, long long start, long long end);
 
     int getId();
     QString getName();
