@@ -6,8 +6,9 @@
 class Task
 {
 public:
-    Task(QString name, QString description, long start, long end);
+    Task(int id, QString name, QString description, long start, long end);
 
+    int getId();
     QString getName();
     QString getDescription();
     QDateTime getStartTime();
@@ -16,6 +17,7 @@ public:
 
 private:
 
+    int m_id;
     QString m_name;
     QString m_description;
     QDateTime m_dateEnd;
