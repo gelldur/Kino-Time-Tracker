@@ -14,7 +14,6 @@ public:
     QDateTime getStartTime();
     QDateTime getEndTime();
 
-
 private:
 
     QString m_name;
