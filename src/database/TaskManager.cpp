@@ -49,13 +49,14 @@ Task *TaskManager::getTask(int id)
 
     qDebug("%s",query.toAscii().constData());
 
-    QSqlQuery zb25 = dataBase->exec(query);
-    if(zb25.next() == false) return NULL;
+    QSqlQuery getQuery = dataBase->exec(query);
+    if(getQuery.next() == false) return NULL;
 
-    QString name = zb25.value(0).toString();
-    long long startTime = zb25.value(1).toLongLong();
-    long long endTime = zb25.value(2).toLongLong();
-    QString description = zb25.value(3).toString();
+    QString name = getQuery.value(0).toString();
+    long long startTime = getQuery.value(1).toLongLong();
+    long long endTime = getQuery.value(2).toLongLong();
+    QString description = getQuery.value(3).toString();
+
     Task* task = new Task(id, name, description, startTime, endTime);
 
     dataBase->close();
