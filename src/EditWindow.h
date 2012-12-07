@@ -2,6 +2,7 @@
 #define EDITWINDOW_H
 
 #include <QDialog>
+#include <QLineEdit>
 
 namespace Ui {
 class EditWindow;
@@ -16,12 +17,20 @@ public:
     ~EditWindow();
     
 private slots:
-    void on_fromYear_editingFinished();
-
-    void on_toYear_editingFinished();
+    void onFromDayEditingFinished();
+    void onFromMonthEditingFinished();
+    void onFromYearEditingFinished();
+    void onToDayEditingFinished();
+    void onToMonthEditingFinished();
+    void onToYearEditingFinished();
 
 private:
     Ui::EditWindow *ui;
+
+    void dayValid(QLineEdit* day);
+    void monthValid(QLineEdit* month);
+    void yearValid(QLineEdit* year);
+
 };
 
 #endif // EDITWINDOW_H
