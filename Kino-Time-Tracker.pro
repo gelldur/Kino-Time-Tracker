@@ -20,7 +20,8 @@ HEADERS += \
     src/EditWindow.h \
     src/database/DatabaseManager.h \
     src/AboutDialog.h \
-    src/Task.h
+    src/Task.h \
+    src/database/TaskManager.h
 
 SOURCES += \
     src/MainWindow.cpp \
@@ -28,7 +29,8 @@ SOURCES += \
     src/EditWindow.cpp \
     src/database/DatabaseManager.cpp \
     src/AboutDialog.cpp \
-    src/Task.cpp
+    src/Task.cpp \
+    src/database/TaskManager.cpp
 
 FORMS += \
     ui/MainWindow.ui \

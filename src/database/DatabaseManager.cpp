@@ -4,6 +4,9 @@
 
 DatabaseManager* DatabaseManager::m_INSTANCE = NULL;
 const QString DatabaseManager::m_DATABASE_NAME = QString("kino_time_tracker.db");
+const QString DatabaseManager::TASK_DATABASE_NAME = QString("tasks");
+const QString DatabaseManager::TASK_TITLE = QString("title");
+const QString DatabaseManager::TASK_ID = QString("_id");
 
 DatabaseManager::DatabaseManager()
 {
@@ -26,6 +29,8 @@ DatabaseManager::DatabaseManager()
     if(!initDatabase)
         initializeDatabase();
 }
+
+
 
 DatabaseManager::~DatabaseManager()
 {
@@ -82,6 +87,7 @@ bool DatabaseManager::isDatabaseExist()
     return QFile::exists(m_DATABASE_NAME);
 }
 
+
 bool DatabaseManager::deleteDatabase()
 {
     // Close database
@@ -108,4 +114,9 @@ void DatabaseManager::initializeDatabase()
         qDebug("Query error:");
         qDebug(query.lastError().text().toStdString().c_str());
     }
+}
+
+QSqlQuery DatabaseManager::exec(QString &query)
+{
+    return db.exec(query);
 }
