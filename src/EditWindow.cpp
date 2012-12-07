@@ -1,6 +1,7 @@
 #include <QDateTime>
 #include <QInputDialog>
 #include <QString>
+#include <QTime>
 #include <cstdio>
 
 #include "EditWindow.h"
@@ -43,6 +44,9 @@ EditWindow::EditWindow(QWidget *parent, Task *task) :
     ui->toYear->setValidator(new QRegExpValidator(regExpYear, this));
     QString yearEnd = task->getEndTime().toString("yyyy");
     ui->toYear->setText(yearEnd);
+
+    QString hourStart = task->getStartTime().toString("hh:mm");
+    ui->fromTime->setTime(QTime::fromString(hourStart));
 
     ui->name->setText(task->getName());
     ui->description->setText(task->getDescription());
