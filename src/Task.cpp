@@ -1,12 +1,17 @@
 #include "Task.h"
 
 
-Task::Task(QString name, QString description, long start, long end)
+Task::Task(int id, QString name, QString description, long start, long end)
 {
+    m_id = id;
     m_name = name;
     m_description = description;
     m_dateStart = QDateTime::fromMSecsSinceEpoch(start);
     m_dateEnd = QDateTime::fromMSecsSinceEpoch(end);
+}
+int Task::getId()
+{
+    return m_id;
 }
 
 QString Task::getName()

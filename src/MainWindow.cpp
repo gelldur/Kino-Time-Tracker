@@ -3,6 +3,8 @@
 #include <QTextStream>
 #include "EditWindow.h"
 #include "AboutDialog.h"
+#include "Task.h"
+#include "TaskManager.h"
 #include "DatabaseManager.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -23,6 +25,11 @@ MainWindow::MainWindow(QWidget *parent) :
     pWordCompleter = new QCompleter(*myList, this);
     pWordCompleter->setCaseSensitivity(Qt::CaseInsensitive);
     ui->lineEdit->setCompleter(pWordCompleter);
+
+    TaskManager t;
+    Task* task  = t.getTask(1);
+
+    qDebug("Wyciagnalem taska id=%d tytul:%s dataS:%lld dataE=%lld opis: %s\n",);
 }
 
 QStringList* MainWindow::loadTextFile()
