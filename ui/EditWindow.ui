@@ -31,6 +31,9 @@
     <height>16777215</height>
    </size>
   </property>
+  <property name="focusPolicy">
+   <enum>Qt::StrongFocus</enum>
+  </property>
   <property name="windowTitle">
    <string>Edit</string>
   </property>
@@ -46,6 +49,9 @@
         <layout class="QVBoxLayout" name="verticalLayoutFrom">
          <item>
           <widget class="QLabel" name="fromText">
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
+           </property>
            <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
            </property>
@@ -416,8 +422,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>257</x>
+     <y>299</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -432,8 +438,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>325</x>
+     <y>299</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>

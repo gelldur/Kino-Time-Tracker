@@ -24,7 +24,7 @@ public:
 
     static const char* DATABASE_FILE_NAME;
 
-    static const char* TASK_DATABASE_NAME;
+    static const char* TASK_TABLE_NAME;
     static const char* TASK_ID;
     static const char* TASK_NAME;
     static const char* TASK_DESCRIPTION;

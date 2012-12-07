@@ -1,5 +1,6 @@
 #include <QDateTime>
 #include <QInputDialog>
+#include <QString>
 #include <cstdio>
 
 #include "EditWindow.h"
@@ -11,7 +12,14 @@ EditWindow::EditWindow(QWidget *parent, Task *task) :
 {
     ui->setupUi(this);
 
-    QRegExp regExpDay("0[1-9]|[12][0-9]|3[01]");
+    connect(ui->fromDay, SIGNAL(editingFinished()), this, SLOT(onFromDayEditingFinished()));
+    connect(ui->fromMonth, SIGNAL(editingFinished()), this, SLOT(onFromMonthEditingFinished()));
+    connect(ui->fromYear, SIGNAL(editingFinished()), this, SLOT(onFromYearEditingFinished()));
+    connect(ui->toDay, SIGNAL(editingFinished()), this, SLOT(onToDayEditingFinished()));
+    connect(ui->toMonth, SIGNAL(editingFinished()), this, SLOT(onToMonthEditingFinished()));
+    connect(ui->toYear, SIGNAL(editingFinished()), this, SLOT(onToYearEditingFinished()));
+
+    QRegExp regExpDay("[0-9]{0,2}");
     ui->fromDay->setValidator(new QRegExpValidator(regExpDay, this));
     QString dayStart = task->getStartTime().toString("dd");
     ui->fromDay->setText(dayStart);
@@ -19,7 +27,7 @@ EditWindow::EditWindow(QWidget *parent, Task *task) :
     QString dayEnd = task->getStartTime().toString("dd");
     ui->toDay->setText(dayEnd);
 
-    QRegExp regExpMonth("0[1-9]|1[012]");
+    QRegExp regExpMonth("[0-9]{0,2}");
     ui->fromMonth->setValidator(new QRegExpValidator(regExpMonth, this));
     QString monthStart = task->getStartTime().toString("mm");
     ui->fromMonth->setText(monthStart);
@@ -27,8 +35,7 @@ EditWindow::EditWindow(QWidget *parent, Task *task) :
     QString monthEnd = task->getStartTime().toString("mm");
     ui->toMonth->setText(monthEnd);
 
-    //QString stringYear = QDateTime::currentDateTime().toString("yyyy");
-    QRegExp regExpYear("[0-9]{4}");
+    QRegExp regExpYear("[0-9]{0,4}");
     ui->fromYear->setValidator(new QRegExpValidator(regExpYear, this));
     QString yearStart = task->getStartTime().toString("yyyy");
     ui->fromDay->setText(yearStart);
@@ -42,24 +49,72 @@ EditWindow::~EditWindow()
     delete ui;
 }
 
-void EditWindow::on_fromYear_editingFinished()
+void EditWindow::onFromDayEditingFinished()
 {
-    QString stringYear = QDateTime::currentDateTime().toString("yyyy");
-    int intStringYear = stringYear.toInt();
-
-    QString stringFromYear = ui->fromYear->text();
-    int yearFrom = stringFromYear.toInt();
-    if(yearFrom>intStringYear) ui->fromYear->setText(stringYear);
-    if(yearFrom<1900) ui->fromYear->setText("1900");
+    dayValid(ui->fromDay);
 }
 
-void EditWindow::on_toYear_editingFinished()
+void EditWindow::onToDayEditingFinished()
+{
+    dayValid(ui->toDay);
+}
+
+void EditWindow::dayValid(QLineEdit *day)
+{
+    QString stringGetDay = day->text();
+    int intDay = stringGetDay.toInt();
+    if(intDay <= 0)
+        intDay=1;
+
+    if(intDay>31)
+        day->setText("31");
+    else if(intDay<10)
+        day->setText(QString("").sprintf("0%d", intDay));
+}
+
+void EditWindow::onFromMonthEditingFinished()
+{
+    monthValid(ui->fromMonth);
+}
+
+void EditWindow::onToMonthEditingFinished()
+{
+    monthValid(ui->toMonth);
+}
+
+void EditWindow::monthValid(QLineEdit *month)
+{
+    QString stringGetMonth = month->text();
+    int intMonth = stringGetMonth.toInt();
+    if(intMonth <= 0)
+        intMonth=1;
+
+    if(intMonth>12)
+        month->setText("12");
+    else if(intMonth<10)
+        month->setText(QString("").sprintf("0%d", intMonth));
+}
+
+
+void EditWindow::onFromYearEditingFinished()
+{
+    yearValid(ui->fromYear);
+}
+
+void EditWindow::onToYearEditingFinished()
+{
+    yearValid(ui->toYear);
+}
+
+void EditWindow::yearValid(QLineEdit* year)
 {
     QString stringYear = QDateTime::currentDateTime().toString("yyyy");
     int intStringYear = stringYear.toInt();
 
-    QString stringToYear = ui->toYear->text();
-    int yearTo = stringToYear.toInt();
-    if(yearTo>intStringYear) ui->toYear->setText(stringYear);
-    if(yearTo<1900) ui->toYear->setText("1900");
+    QString stringGetYear = year->text();
+    int intYear = stringGetYear.toInt();
+    if(intYear>intStringYear)
+        year->setText(stringYear);
+    else if(intYear<1900)
+        year->setText("1900");
 }

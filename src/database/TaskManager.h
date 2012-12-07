@@ -8,6 +8,8 @@ public:
     TaskManager();
 
     bool addTask(Task *task);
+
+    Task* getTask(int id);
 };
 
 #endif // TASKMANAGER_H
