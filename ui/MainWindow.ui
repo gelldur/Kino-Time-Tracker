@@ -92,7 +92,7 @@
          </font>
         </property>
         <property name="text">
-         <string>time</string>
+         <string/>
         </property>
        </widget>
       </item>
