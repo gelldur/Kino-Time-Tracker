@@ -1,6 +1,8 @@
 #include "TaskManager.h"
 #include "DatabaseManager.h"
 #include <QSqlQuery>
+#include <QDebug>
+#include <QSqlResult>
 
 TaskManager::TaskManager()
 {
@@ -16,19 +18,30 @@ bool TaskManager::addTask(Task *task)
 
     QString query("INSERT INTO ");
     query.append(DatabaseManager::TASK_TABLE_NAME);
-    query.append("(");
+    query.append(" (");
     query.append(DatabaseManager::TASK_NAME);
     query.append(",").append(DatabaseManager::TASK_START_TIME);
     query.append(",").append(DatabaseManager::TASK_END_TIME);
     query.append(",").append(DatabaseManager::TASK_DESCRIPTION);
-    query.append(") VALUES (");
+    query.append(") VALUES ('");
     query.append(task->getName());
-    query.append(",").append(QString::number(task->getStartTime().toMSecsSinceEpoch()));
-    query.append(",").append(QString::number(task->getEndTime().toMSecsSinceEpoch()));
-    query.append(",").append(task->getDescription());
-    query.append(")");
-    dataBase->exec(query);
-    return true;
+    query.append("','").append(QString::number(task->getStartTime().toMSecsSinceEpoch()));
+    query.append("','").append(QString::number(task->getEndTime().toMSecsSinceEpoch()));
+    query.append("','").append(task->getDescription());
+    query.append("');");
+
+    qDebug() << query;
+    QSqlQuery outpuQuery = dataBase->exec(query);
+
+    bool returnValue;
+    int returnedId = Task::NOT_INSERTED_TO_DATABASE;
+    qDebug("po insercie dostalem id: %d",outpuQuery.lastInsertId().toInt(&returnValue));
+    qDebug()<< "Udalo sie: " << returnValue;
+
+    task->setId(returnedId);
+
+    dataBase->close();
+    return returnValue;
 }
 
 Task *TaskManager::getTask(int id)

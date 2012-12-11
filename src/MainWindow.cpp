@@ -35,6 +35,10 @@ MainWindow::MainWindow(QWidget *parent) :
            task->getStartTime().toMSecsSinceEpoch(),
            task->getEndTime().toMSecsSinceEpoch(),
            task->getDescription().toAscii().constData());
+
+    task = new Task("a","b",0,1);
+
+    t.addTask(task);
 }
 
 QStringList* MainWindow::loadTextFile()
@@ -62,7 +66,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::openEditWindow()
 {
-    Task *task = new Task(1, "testowy", "opis testowy", QDateTime::currentMSecsSinceEpoch(), QDateTime::currentMSecsSinceEpoch());
+    Task *task = new Task("testowy", "opis testowy", QDateTime::currentMSecsSinceEpoch(), QDateTime::currentMSecsSinceEpoch());
     EditWindow* editWindow = new EditWindow(this, task);
     editWindow->show();
 }

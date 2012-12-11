@@ -68,6 +68,8 @@ bool DatabaseManager::open()
 
 bool DatabaseManager::close()
 {
+    if(!lastError().text().isEmpty())
+        qDebug(lastError().text().toAscii().constData());
 
     db.close();
 
