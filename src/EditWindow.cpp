@@ -13,6 +13,10 @@ EditWindow::EditWindow(QWidget *parent, Task *task) :
 {
     ui->setupUi(this);
 
+    QString windowTitle = "Task ";
+    windowTitle.append(task->getName());
+    setWindowTitle(windowTitle);
+
     connect(ui->fromDay, SIGNAL(editingFinished()), this, SLOT(onFromDayEditingFinished()));
     connect(ui->fromMonth, SIGNAL(editingFinished()), this, SLOT(onFromMonthEditingFinished()));
     connect(ui->fromYear, SIGNAL(editingFinished()), this, SLOT(onFromYearEditingFinished()));
