@@ -14,7 +14,7 @@ EditWindow::EditWindow(QWidget *parent, Task *task) :
     ui->setupUi(this);
 
     QString windowTitle = "Task ";
-    windowTitle.append(task->getName());
+    windowTitle.append(task->getTitle());
     setWindowTitle(windowTitle);
 
     connect(ui->fromDay, SIGNAL(editingFinished()), this, SLOT(onFromDayEditingFinished()));
@@ -55,7 +55,7 @@ EditWindow::EditWindow(QWidget *parent, Task *task) :
     ui->toTime->setTime(QTime::fromString(hourEnd, "hhmm"));
 
 
-    ui->name->setText(task->getName());
+    ui->name->setText(task->getTitle());
     ui->description->setText(task->getDescription());
 }
 

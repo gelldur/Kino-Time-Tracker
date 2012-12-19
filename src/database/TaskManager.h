@@ -11,9 +11,10 @@ class TaskManager
 public:
     TaskManager();
 
-    bool addTask(Task *task);
+    bool add(Task *task);
 
-    Task* getTask(int id);
+    Task* get(int id);
+    void update(Task* task);
 
     //Default DESC order
     vector<Task*>* getMostPopular(int limit,bool asc = false);

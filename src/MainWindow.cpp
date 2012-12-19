@@ -27,11 +27,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lineEdit->setCompleter(pWordCompleter);
 
     TaskManager t;
-    Task* task  = t.getTask(1);
+    Task* task  = t.get(1);
     if(task != NULL)
         qDebug("Wyciagnalem taska id=%d tytul:%s dataS:%lld dataE=%lld opis: %s\n",
                task->getId(),
-               task->getName().toAscii().constData(),
+               task->getTitle().toAscii().constData(),
                task->getStartTime().toMSecsSinceEpoch(),
                task->getEndTime().toMSecsSinceEpoch(),
                task->getDescription().toAscii().constData());
@@ -44,13 +44,16 @@ MainWindow::MainWindow(QWidget *parent) :
             Task* task  = pTasks->at(i);
             qDebug("Wyciagnalem taska id=%d tytul:%s dataS:%lld dataE=%lld opis: %s\n",
                    task->getId(),
-                   task->getName().toAscii().constData(),
+                   task->getTitle().toAscii().constData(),
                    task->getStartTime().toMSecsSinceEpoch(),
                    task->getEndTime().toMSecsSinceEpoch(),
                    task->getDescription().toAscii().constData());
         }
     else
         qDebug() << "Brak wynikow";
+
+    pTasks->at(0)->setTitle("cooos");
+    t.update(pTasks->at(0));
 }
 
 QStringList* MainWindow::loadTextFile()

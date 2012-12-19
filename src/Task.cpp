@@ -2,18 +2,18 @@
 
 const int Task::NOT_INSERTED_TO_DATABASE = 0;
 
-void Task::init(QString name, QString description, long long start, long long end,int id = NOT_INSERTED_TO_DATABASE )
+void Task::init(QString title, QString description, long long start, long long end,int id = NOT_INSERTED_TO_DATABASE )
 {
     m_id = id;
-    m_name = name;
+    m_title = title;
     m_description = description;
     m_dateStart = QDateTime::fromMSecsSinceEpoch(start);
     m_dateEnd = QDateTime::fromMSecsSinceEpoch(end);
 }
 
-Task::Task(int id, QString name, QString description, long long start, long long end)
+Task::Task(int id, QString title, QString description, long long start, long long end)
 {
-    init(name,description,start,end,id);
+    init(title,description,start,end,id);
 }
 
 void Task::setId(int id)
@@ -21,10 +21,10 @@ void Task::setId(int id)
     m_id = id;
 }
 
-Task::Task(QString name, QString description, long long start, long long end)
+Task::Task(QString title, QString description, long long start, long long end)
 {
     //We should add this object to database to get ID
-    init(name,description,start,end);
+    init(title,description,start,end);
 }
 
 int Task::getId()
@@ -32,9 +32,9 @@ int Task::getId()
     return m_id;
 }
 
-QString Task::getName()
+QString Task::getTitle()
 {
-    return m_name;
+    return m_title;
 }
 
 QString Task::getDescription()
@@ -50,4 +50,9 @@ QDateTime Task::getStartTime()
 QDateTime Task::getEndTime()
 {
     return m_dateEnd;
+}
+
+void Task::setTitle(const char* title)
+{
+    m_title = QString(title);
 }

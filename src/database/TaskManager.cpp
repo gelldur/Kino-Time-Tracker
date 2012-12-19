@@ -8,7 +8,7 @@ TaskManager::TaskManager()
 {
 }
 
-bool TaskManager::addTask(Task *task)
+bool TaskManager::add(Task *task)
 {
     DatabaseManager *dataBase = DatabaseManager::getInstance();
     if(dataBase->open()==false)
@@ -24,7 +24,7 @@ bool TaskManager::addTask(Task *task)
     query.append(",").append(DatabaseManager::TASK_END_TIME);
     query.append(",").append(DatabaseManager::TASK_DESCRIPTION);
     query.append(") VALUES ('");
-    query.append(task->getName());
+    query.append(task->getTitle());
     query.append("','").append(QString::number(task->getStartTime().toMSecsSinceEpoch()));
     query.append("','").append(QString::number(task->getEndTime().toMSecsSinceEpoch()));
     query.append("','").append(task->getDescription());
@@ -44,7 +44,7 @@ bool TaskManager::addTask(Task *task)
     return returnValue;
 }
 
-Task *TaskManager::getTask(int id)
+Task *TaskManager::get(int id)
 {
     DatabaseManager *dataBase = DatabaseManager::getInstance();
     if(dataBase->open()==false)
@@ -141,4 +141,33 @@ vector<Task*>* TaskManager::getMostPopular(int limit, bool asc)
 
     dataBase->close();
     return tasks;
+}
+
+void TaskManager::update(Task *task)
+{
+    DatabaseManager *dataBase = DatabaseManager::getInstance();
+    if(dataBase->open()==false)
+    {
+        return;
+    }
+
+    //Example of comand
+    //UPDATE tasks SET title="nowa_nazwa" WHERE _id=1
+    QString query("UPDATE ");
+    query.append(DatabaseManager::TASK_TABLE_NAME);
+    query.append(" SET ").append(DatabaseManager::TASK_TITLE);
+    query.append("=\"").append(task->getTitle());
+    query.append("\",").append(DatabaseManager::TASK_START_TIME);
+    query.append("=").append(QString::number(task->getStartTime().toMSecsSinceEpoch()));
+    query.append(",").append(DatabaseManager::TASK_END_TIME);
+    query.append("=").append(QString::number(task->getEndTime().toMSecsSinceEpoch()));
+    query.append(",").append(DatabaseManager::TASK_DESCRIPTION);
+    query.append("=\"").append(task->getDescription());
+    query.append("\" WHERE ").append(DatabaseManager::TASK_ID);
+    query.append("=").append(QString::number(task->getId()));
+
+    qDebug("%s",query.toAscii().constData());
+
+    dataBase->exec(query);
+    dataBase->close();
 }
