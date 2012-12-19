@@ -29,16 +29,29 @@ MainWindow::MainWindow(QWidget *parent) :
     TaskManager t;
     Task* task  = t.getTask(1);
     if(task != NULL)
-    qDebug("Wyciagnalem taska id=%d tytul:%s dataS:%lld dataE=%lld opis: %s\n",
-           task->getId(),
-           task->getName().toAscii().constData(),
-           task->getStartTime().toMSecsSinceEpoch(),
-           task->getEndTime().toMSecsSinceEpoch(),
-           task->getDescription().toAscii().constData());
+        qDebug("Wyciagnalem taska id=%d tytul:%s dataS:%lld dataE=%lld opis: %s\n",
+               task->getId(),
+               task->getName().toAscii().constData(),
+               task->getStartTime().toMSecsSinceEpoch(),
+               task->getEndTime().toMSecsSinceEpoch(),
+               task->getDescription().toAscii().constData());
 
-    task = new Task("a","b",0,1);
 
-    t.addTask(task);
+    vector<Task*>* pTasks = t.getMostPopular(0);
+    if(pTasks != NULL)
+        for(int i=0;i<pTasks->size();++i)
+        {
+            Task* task  = pTasks->at(i);
+            qDebug("Wyciagnalem taska id=%d tytul:%s dataS:%lld dataE=%lld opis: %s\n",
+                   task->getId(),
+                   task->getName().toAscii().constData(),
+                   task->getStartTime().toMSecsSinceEpoch(),
+                   task->getEndTime().toMSecsSinceEpoch(),
+                   task->getDescription().toAscii().constData());
+        }
+    else
+        qDebug() << "Brak wynikow";
+
 }
 
 QStringList* MainWindow::loadTextFile()

@@ -26,7 +26,7 @@ public:
 
     static const char* TASK_TABLE_NAME;
     static const char* TASK_ID;
-    static const char* TASK_NAME;
+    static const char* TASK_TITLE;
     static const char* TASK_DESCRIPTION;
     static const char* TASK_START_TIME;
     static const char* TASK_END_TIME;

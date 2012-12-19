@@ -19,7 +19,7 @@ bool TaskManager::addTask(Task *task)
     QString query("INSERT INTO ");
     query.append(DatabaseManager::TASK_TABLE_NAME);
     query.append(" (");
-    query.append(DatabaseManager::TASK_NAME);
+    query.append(DatabaseManager::TASK_TITLE);
     query.append(",").append(DatabaseManager::TASK_START_TIME);
     query.append(",").append(DatabaseManager::TASK_END_TIME);
     query.append(",").append(DatabaseManager::TASK_DESCRIPTION);
@@ -54,7 +54,7 @@ Task *TaskManager::getTask(int id)
 
     QString query("SELECT ");
     query.append(DatabaseManager::TASK_ID);
-    query.append(",").append(DatabaseManager::TASK_NAME);
+    query.append(",").append(DatabaseManager::TASK_TITLE);
     query.append(",").append(DatabaseManager::TASK_START_TIME);
     query.append(",").append(DatabaseManager::TASK_END_TIME);
     query.append(",").append(DatabaseManager::TASK_DESCRIPTION);
@@ -96,4 +96,45 @@ vector<Task*>* TaskManager::parseTask(QSqlQuery &sqlQuery)
     return tasks;
 }
 
+vector<Task*>* TaskManager::getMostPopular(int count, bool asc)
+{
+    DatabaseManager *dataBase = DatabaseManager::getInstance();
+    if(dataBase->open()==false)
+    {
+        return NULL;
+    }
+    //Example of comand
+    //SELECT * FROM tasks GROUP BY title ORDER BY COUNT(title) DESC
+    QString query("SELECT ");
+    query.append(DatabaseManager::TASK_ID);
+    query.append(",").append(DatabaseManager::TASK_TITLE);
+    query.append(",").append(DatabaseManager::TASK_START_TIME);
+    query.append(",").append(DatabaseManager::TASK_END_TIME);
+    query.append(",").append(DatabaseManager::TASK_DESCRIPTION);
+    query.append(" FROM ").append(DatabaseManager::TASK_TABLE_NAME);
+    query.append(" GROUP BY ").append(DatabaseManager::TASK_TITLE);
+    query.append(" ORDER BY COUNT(").append(DatabaseManager::TASK_TITLE);
+    if(asc)
+    {
+        query.append(") ASC;");
+    }
+    else
+    {
+        query.append(") DESC;");
+    }
 
+    qDebug("%s",query.toAscii().constData());
+
+    QSqlQuery getQuery = dataBase->exec(query);
+
+    vector<Task*>* tasks = parseTask(getQuery);
+    if(tasks->size() < 1)
+    {
+        delete tasks;
+        return NULL;
+    }
+
+
+    dataBase->close();
+    return tasks;
+}

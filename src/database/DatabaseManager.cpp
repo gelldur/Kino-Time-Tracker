@@ -6,7 +6,7 @@ DatabaseManager* DatabaseManager::m_INSTANCE = NULL;
 const char* DatabaseManager::DATABASE_FILE_NAME = "kino_time_tracker_database.db";
 
 const char* DatabaseManager::TASK_TABLE_NAME = "tasks";
-const char* DatabaseManager::TASK_NAME = "title";
+const char* DatabaseManager::TASK_TITLE = "title";
 const char* DatabaseManager::TASK_ID = "_id";
 const char* DatabaseManager::TASK_DESCRIPTION = "description";
 const char* DatabaseManager::TASK_START_TIME = "start_time";
@@ -111,7 +111,7 @@ void DatabaseManager::initializeDatabase()
     execQuery.append(TASK_TABLE_NAME);
     execQuery.append(" (").append(TASK_ID);
     execQuery.append(" INTEGER PRIMARY KEY AUTOINCREMENT,");
-    execQuery.append(TASK_NAME).append(" TEXT,");
+    execQuery.append(TASK_TITLE).append(" TEXT,");
     execQuery.append(TASK_START_TIME).append(" INTEGER,");
     execQuery.append(TASK_END_TIME).append(" INTEGER,");
     execQuery.append(TASK_DESCRIPTION).append(" TEXT);");
