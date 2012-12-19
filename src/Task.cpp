@@ -57,17 +57,27 @@ void Task::setTitle(const char* title)
     m_title = QString(title);
 }
 
+void Task::setTitle(const QString &title)
+{
+    m_title = title;
+}
+
 void Task::setDescription(const char *description)
 {
     m_description = QString(description);
 }
 
-void Task::setStartTime(const long *start)
+void Task::setDescription(const QString &description)
 {
-    m_dateStart = QDateTime(start);
+    m_description = description;
 }
 
-void Task::setEndTime(const long *end)
+void Task::setStartTime(const QDateTime &start)
 {
-    m_dateEnd = QDateTime(end);
+    m_dateStart = start;
+}
+
+void Task::setEndTime(const QDateTime &end)
+{
+    m_dateEnd = end;
 }

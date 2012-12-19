@@ -32,9 +32,11 @@ public:
     QDateTime getEndTime();
     bool isInProgress();
     void setTitle(const char* title);
+    void setTitle(const QString &title);
+    void setDescription(const QString &description);
     void setDescription(const char *description);
-    void setStartTime(const long *start);
-    void setEndTime(const long *end);
+    void setStartTime(const QDateTime &start);
+    void setEndTime(const QDateTime &end);
 };
 
 #endif // TASK_H
