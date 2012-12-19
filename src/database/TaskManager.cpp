@@ -96,8 +96,11 @@ vector<Task*>* TaskManager::parseTask(QSqlQuery &sqlQuery)
     return tasks;
 }
 
-vector<Task*>* TaskManager::getMostPopular(int count, bool asc)
+vector<Task*>* TaskManager::getMostPopular(int limit, bool asc)
 {
+    if(limit < 1)
+        return NULL;
+
     DatabaseManager *dataBase = DatabaseManager::getInstance();
     if(dataBase->open()==false)
     {
@@ -116,12 +119,13 @@ vector<Task*>* TaskManager::getMostPopular(int count, bool asc)
     query.append(" ORDER BY COUNT(").append(DatabaseManager::TASK_TITLE);
     if(asc)
     {
-        query.append(") ASC;");
+        query.append(") ASC LIMIT ");
     }
     else
     {
-        query.append(") DESC;");
+        query.append(") DESC LIMIT ");
     }
+    query.append(limit+48);//Convert int to char
 
     qDebug("%s",query.toAscii().constData());
 

@@ -16,7 +16,7 @@ public:
     Task* getTask(int id);
 
     //Default DESC order
-    vector<Task*>* getMostPopular(int count,bool asc = false);
+    vector<Task*>* getMostPopular(int limit,bool asc = false);
 
 private:
     vector<Task*>* parseTask(QSqlQuery& sqlQuery);

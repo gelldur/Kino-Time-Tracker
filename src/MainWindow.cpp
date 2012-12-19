@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
                task->getDescription().toAscii().constData());
 
 
-    vector<Task*>* pTasks = t.getMostPopular(0);
+    vector<Task*>* pTasks = t.getMostPopular(2);
     if(pTasks != NULL)
         for(int i=0;i<pTasks->size();++i)
         {
@@ -51,7 +51,6 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     else
         qDebug() << "Brak wynikow";
-
 }
 
 QStringList* MainWindow::loadTextFile()
