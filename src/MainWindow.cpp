@@ -52,8 +52,6 @@ MainWindow::MainWindow(QWidget *parent) :
     else
         qDebug() << "Brak wynikow";
 
-    pTasks->at(0)->setTitle("cooos");
-    t.update(pTasks->at(0));
 }
 
 QStringList* MainWindow::loadTextFile()
