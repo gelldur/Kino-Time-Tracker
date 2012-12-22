@@ -19,11 +19,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->menuEdit,SIGNAL(aboutToShow()),this,SLOT(openEditWindow()));
     connect(ui->ActionAbout,SIGNAL(triggered()),this,SLOT(openAboutDialog()));
 
-    //QStringList *myList = setAutoCompleter();
-    QStringList* myList =  loadTextFile();
-    /*QStringList myList;
-    myList <<"Ala" <<"Asia"<<"Bartek"<<"Basia"<<"Czarek"<<"Cecylia"<<"Michal"<<"Mateusza"<<"Mateusz";
-    pWordCompleter = new QCompleter(myList, this);*/
+    QStringList *myList = setAutoCompleter();
+    myList->append("test");
+
     pWordCompleter = new QCompleter(*myList, this);
     pWordCompleter->setCaseSensitivity(Qt::CaseInsensitive);
     ui->lineEdit->setCompleter(pWordCompleter);
@@ -59,18 +57,22 @@ MainWindow::MainWindow(QWidget *parent) :
 
 QStringList *MainWindow::setAutoCompleter()
 {
-    QStringList *tasksList = new QStringList();
+    QStringList *pTasksList = new QStringList();
     TaskManager autoCompleter;
     vector<Task*> *pSetTasks = autoCompleter.getMostPopular(20);
 
+    if(pSetTasks == NULL)
+    {
+        return pTasksList;
+    }
     for(int j=0; j<pSetTasks->size(); ++j)
     {
         Task *tasks = pSetTasks->at(j);
         QString str = tasks->getTitle();
-        tasksList->operator<<(str);
+        pTasksList->operator<<(str);
     }
 
-    return tasksList;
+    return pTasksList;
 }
 
 QStringList* MainWindow::loadTextFile()

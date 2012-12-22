@@ -125,7 +125,7 @@ vector<Task*>* TaskManager::getMostPopular(int limit, bool asc)
     {
         query.append(") DESC LIMIT ");
     }
-    query.append(limit+48);//Convert int to char
+    query.append(QString::number(limit));//Convert int to char
 
     qDebug("%s",query.toAscii().constData());
 
