@@ -18,6 +18,7 @@ private:
     Ui::MainWindow *ui;
     QCompleter *pWordCompleter;
     QStringList* loadTextFile();
+    QStringList *setAutoCompleter();
 
 public slots:
 

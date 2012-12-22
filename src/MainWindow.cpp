@@ -6,6 +6,7 @@
 #include "Task.h"
 #include "TaskManager.h"
 #include "DatabaseManager.h"
+#include <vector>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -18,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->menuEdit,SIGNAL(aboutToShow()),this,SLOT(openEditWindow()));
     connect(ui->ActionAbout,SIGNAL(triggered()),this,SLOT(openAboutDialog()));
 
+    //QStringList *myList = setAutoCompleter();
     QStringList* myList =  loadTextFile();
     /*QStringList myList;
     myList <<"Ala" <<"Asia"<<"Bartek"<<"Basia"<<"Czarek"<<"Cecylia"<<"Michal"<<"Mateusza"<<"Mateusz";
@@ -25,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     pWordCompleter = new QCompleter(*myList, this);
     pWordCompleter->setCaseSensitivity(Qt::CaseInsensitive);
     ui->lineEdit->setCompleter(pWordCompleter);
+
 
     TaskManager t;
     Task* task  = t.get(1);
@@ -52,6 +55,22 @@ MainWindow::MainWindow(QWidget *parent) :
     else
         qDebug() << "Brak wynikow";
 
+}
+
+QStringList *MainWindow::setAutoCompleter()
+{
+    QStringList *tasksList = new QStringList();
+    TaskManager autoCompleter;
+    vector<Task*> *pSetTasks = autoCompleter.getMostPopular(20);
+
+    for(int j=0; j<pSetTasks->size(); ++j)
+    {
+        Task *tasks = pSetTasks->at(j);
+        QString str = tasks->getTitle();
+        tasksList->operator<<(str);
+    }
+
+    return tasksList;
 }
 
 QStringList* MainWindow::loadTextFile()
