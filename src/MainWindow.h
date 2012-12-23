@@ -31,6 +31,7 @@ public:
 
 private slots:
    void openAboutDialog();
+   void clickButtonStart();
 };
 
 #endif // MAINWINDOW_H

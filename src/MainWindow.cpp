@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->menuEdit,SIGNAL(aboutToShow()),this,SLOT(openEditWindow()));
     connect(ui->ActionAbout,SIGNAL(triggered()),this,SLOT(openAboutDialog()));
+    connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(clickButtonStart()));
 
     QStringList *myList = setAutoCompleter();
     myList->append("test");
@@ -111,4 +112,25 @@ void MainWindow::openAboutDialog()
     aboutWindow.setModal(true);
     aboutWindow.exec();*/
     QMessageBox::information(this, "About Time Tracker", "Created by KINO's group Adam Mickiewicz University");
+}
+
+void MainWindow::clickButtonStart()
+{
+    QString name = ui->lineEdit->text();
+    TaskManager c;
+    Task *task;
+    if(name!=NULL && ui->pushButton->text()=="Start")
+    {
+        Task *task = new Task(name, "", QDateTime::currentMSecsSinceEpoch(),QDateTime::currentMSecsSinceEpoch());
+        c.add(task);
+        ui->pushButton->setText("Stop");
+        return;
+    }
+
+    if(ui->pushButton->text()=="Stop")
+    {
+        c.update(task);
+        ui->pushButton->setText("Start");
+        return;
+    }
 }
