@@ -129,7 +129,7 @@ void MainWindow::clickButtonStart()
 
     if(ui->pushButton->text()=="Stop")
     {
-        c.update(task);
+      //  c.update(task);
         ui->pushButton->setText("Start");
         return;
     }
