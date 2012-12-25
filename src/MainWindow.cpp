@@ -114,19 +114,20 @@ void MainWindow::openAboutDialog()
 
 void MainWindow::clickButtonStart()
 {
+    TaskManager c;
     QString name = ui->lineEdit->text();
-    if(currentTask==NULL)
+    if(pCurrentTask==NULL)
     {
-       currentTask = new Task(name, "", QDateTime::currentMSecsSinceEpoch(), QDateTime::currentMSecsSinceEpoch());
-        c.add(currentTask);
+       pCurrentTask = new Task(name, "", QDateTime::currentMSecsSinceEpoch(), QDateTime::currentMSecsSinceEpoch());
+        c.add(pCurrentTask);
         ui->pushButton->setText("Stop");
         return;
     }
 
-    if(currentTask!=NULL)
+    if(pCurrentTask!=NULL)
     {
-        c.update(currentTask);
-        currentTask = NULL;
+        c.update(pCurrentTask);
+        pCurrentTask = NULL;
         ui->pushButton->setText("Start");
         return;
     }

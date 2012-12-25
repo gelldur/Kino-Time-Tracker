@@ -19,8 +19,7 @@ private:
 
     Ui::MainWindow *ui;
     QCompleter *pWordCompleter;
-    TaskManager c;
-    Task *currentTask;
+    Task *pCurrentTask;
     QStringList* loadTextFile();
     QStringList *setAutoCompleter();
 
