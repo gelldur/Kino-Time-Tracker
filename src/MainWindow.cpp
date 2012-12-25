@@ -3,8 +3,6 @@
 #include <QTextStream>
 #include "EditWindow.h"
 #include "AboutDialog.h"
-#include "Task.h"
-#include "TaskManager.h"
 #include "DatabaseManager.h"
 #include <vector>
 
@@ -117,19 +115,18 @@ void MainWindow::openAboutDialog()
 void MainWindow::clickButtonStart()
 {
     QString name = ui->lineEdit->text();
-    TaskManager c;
-    Task *task;
-    if(name!=NULL && ui->pushButton->text()=="Start")
+    if(currentTask==NULL)
     {
-        Task *task = new Task(name, "", QDateTime::currentMSecsSinceEpoch(),QDateTime::currentMSecsSinceEpoch());
-        c.add(task);
+       currentTask = new Task(name, "", QDateTime::currentMSecsSinceEpoch(), QDateTime::currentMSecsSinceEpoch());
+        c.add(currentTask);
         ui->pushButton->setText("Stop");
         return;
     }
 
-    if(ui->pushButton->text()=="Stop")
+    if(currentTask!=NULL)
     {
-      //  c.update(task);
+        c.update(currentTask);
+        currentTask = NULL;
         ui->pushButton->setText("Start");
         return;
     }

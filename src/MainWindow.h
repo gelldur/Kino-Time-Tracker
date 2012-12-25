@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QCompleter>
 #include <QFile>
+#include "Task.h"
+#include "TaskManager.h"
 
 namespace Ui
 {
@@ -17,6 +19,8 @@ private:
 
     Ui::MainWindow *ui;
     QCompleter *pWordCompleter;
+    TaskManager c;
+    Task *currentTask;
     QStringList* loadTextFile();
     QStringList *setAutoCompleter();
 
