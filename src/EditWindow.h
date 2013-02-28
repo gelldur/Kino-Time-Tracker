@@ -24,6 +24,7 @@ private slots:
     void onToDayEditingFinished();
     void onToMonthEditingFinished();
     void onToYearEditingFinished();
+    void onToTimeFinished();
 
 private:
     Ui::EditWindow *ui;

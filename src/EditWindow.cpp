@@ -23,6 +23,7 @@ EditWindow::EditWindow(QWidget *parent, Task *task) :
     connect(ui->toDay, SIGNAL(editingFinished()), this, SLOT(onToDayEditingFinished()));
     connect(ui->toMonth, SIGNAL(editingFinished()), this, SLOT(onToMonthEditingFinished()));
     connect(ui->toYear, SIGNAL(editingFinished()), this, SLOT(onToYearEditingFinished()));
+    connect(ui->toTime, SIGNAL(editingFinished()), this, SLOT(onToTimeFinished()));
 
     QRegExp regExpDay("[0-9]{0,2}");
     ui->fromDay->setValidator(new QRegExpValidator(regExpDay, this));
@@ -122,10 +123,51 @@ void EditWindow::onToYearEditingFinished()
     qDebug("%d",ui->fromYear->text().compare(ui->toYear->text()));
     if(ui->fromYear->text().toInt() > ui->toYear->text().toInt())
     {
-        ui->toYear->clear();
+        ui->toYear->setText(ui->fromYear->text());
+        if(ui->fromMonth->text().toInt() > ui->toMonth->text().toInt())
+        {
+            ui->toMonth->setText(ui->fromMonth->text());
+            if(ui->fromDay->text().toInt() > ui->toDay->text().toInt())
+            {
+                ui->toDay->setText(ui->fromDay->text());
+            }
+        }
+    }
+    else if(ui->fromYear->text().toInt() == ui->toYear->text().toInt())
+    {
+        if(ui->fromMonth->text().toInt() > ui->toMonth->text().toInt())
+        {
+            ui->toMonth->setText(ui->fromMonth->text());
+            if(ui->fromDay->text().toInt() > ui->toDay->text().toInt())
+            {
+                ui->toDay->setText(ui->fromDay->text());
+            }
+        }
+        else if(ui->fromMonth->text().toInt() == ui->toMonth->text().toInt())
+        {
+            if(ui->fromDay->text().toInt() > ui->toDay->text().toInt())
+            {
+                ui->toDay->setText(ui->fromDay->text());
+            }
+        }
 
     }
-    //if(yearValid < ui->fromYear)
+}
+void EditWindow::onToTimeFinished()
+{
+    if(ui->fromTime->time() > ui->toTime->time())
+    {
+        if(ui->fromYear->text().toInt() == ui->toYear->text().toInt())
+        {
+            if(ui->fromMonth->text().toInt() == ui->toMonth->text().toInt())
+            {
+                if(ui->fromDay->text().toInt() == ui->toDay->text().toInt())
+                {
+                    ui->toTime->setTime(ui->fromTime->time());
+                }
+            }
+        }
+    }
 }
 
 void EditWindow::yearValid(QLineEdit* year)
